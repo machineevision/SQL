@@ -1,0 +1,28 @@
+3) Görevler
+
+a)Belirli Kolonları Seçme
+employees tablosunda belirtilen firstname, lastname ve salary sütunlarını listelemek için kullandığımız SQL sorgusu
+
+select  firstname, lastname, salary from employees;
+
+b)DISTINCT Komutu ile Tekrarları Önleme
+employees tablosunda belirtilen departmentid değerinin tekrarsız olarak gösterimini sağlayan SQL sorgusu
+
+select DISTINCT departmentid from employees
+
+c)Belirli Bir Departmana Ait Çalışanları Listeleme
+employees tablosunda departmenidsi 1 olan kişileri listelemek için kullanılan SQL sorgusu 
+
+select DISTINCT firstname || ' ' || lastname from employees where departmentid='1'
+
+d)Maaşa Göre Sıralama
+employees tablosunda salary değerini büyükten küçüğe sıralamak için kullanılan SQL sorgusu
+
+select employeeid, firstname, lastname, age, departmentid,salary, joindate from employees
+order by salary DESC 
+
+e) Kolonları Birleştirme (Concatenation)
+employees tablosunda firstname ve lastname değerlerini tek bir sütunda birleştiren SQL sorgusu
+
+select firstname || '' || lastname as first_lastname from employees
+
