@@ -1,0 +1,36 @@
+3. Sorular
+
+1)Invoice tablosunda, tüm değerleri NULL olan kayıtların sayısı:
+
+Select Count(*) From invoice Where(customer_id,invoice_date,billing_address,billing_city,billing_state,billing_country,billingpostal_code,total) IS NULL;
+
+Count ile bütün sütunları sayıp, where ile koşul çerçevesinde invoice tablosunun bütün sutünlarının değerinin null olanlarını getirmeye yarayan sorgudur.
+
+
+
+2)Total değerlerinde bir hata olduğunu belirtiyorlar.Bu değerlerin iki katını görmek ve eski versiyonlarıyla birlikte karşılaştırmak için bir sorgu yazmanız isteniyor. 
+Ayrıca, verilerin daha rahat takip edilebilmesi için,tablonun yeni versiyonuna ait kolona göre büyükten küçüğe sıralama yapılan sorgu:
+
+SELECT 
+    invoice_id, 
+    total as ilk_deger, 
+    total * 2 as son_deger
+FROM invoice
+ORDER BY son_deger DESC;
+
+İnvoice tablosunda, mevcut total değerini ilk değer olarak gösteren ve total değerinin 2 katını alıp son değer olarak tanımlayarak yeni bir sütun oluşturan değeri büyükten küçüğe sıralamaya yarayan sorgudur.
+
+3)Adres kolonundaki verileri, soldan 3 karakter ve sağdan 4 karakter alarak birleştirmeniz ve "Açık Adres" olarak yazmanız isteniyor. 
+Ayrıca, bu yeni açık adresi 2013 yılı ve 8. ay’a göre filtreleme sorgusu:
+
+SELECT
+  SUBSTR(billing_address, 1, 3) || SUBSTR(billing_address, LENGTH(billing_address) - 3, 4) AS "Açık Adres"
+FROM
+  invoice
+WHERE
+EXTRACT(YEAR FROM invoice_date) = 2013 AND EXTRACT(MONTH FROM invoice_date) = 8;
+
+Substiring fonksiyonu string verilerde istenilen karakter kadar verinin geri döndürülmesini sağlar. Bir karakter aralığını çekip almamızı sağlar. 
+SUBSTR(billing_address, 1, 3) billing_adress sütununda 1.karakterden itibaren 3 karakter almamızı sağlar.
+SUBSTR(billing_address, LENGTH(billing_address) - 3, 4) billing_address sütununun karakter sayısının sondan başlaması için karakter sayısından 3 çıkartıp daha sonraki 4 karakteri almamıza yarar.
+Extract komutu ile ilgili alandaki tarih / saat verisinden istenilen bölümü almak için kullanırız. 2013 yılı ve 8. aydan filtre koşuluna uyan bütün satırların çalışmasını sağlayan sorgudur.

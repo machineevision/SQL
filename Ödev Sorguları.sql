@@ -1,14 +1,17 @@
-select * from departments
+Select * from invoice 
 
-select * from employees
+Select Count(*) From invoice Where invoice IS NULL;
 
-select  firstname, lastname, salary from employees;
+SELECT invoice_id,
+       total,
+       total * 2 AS YeniTotal
+FROM invoice
+ORDER BY YeniTotal DESC;
 
-select DISTINCT departmentid from employees
 
-select DISTINCT firstname || ' ' || lastname from employees where departmentid='1'
-
-select employeeid, firstname, lastname, age, departmentid,salary, joindate from employees
-order by salary DESC
-
-select firstname || '' || lastname as first_lastname from employees
+SELECT
+  SUBSTR(billing_address, 1, 3) || SUBSTR(billing_address, LENGTH(billing_address) - 3, 4) AS "Açık Adres"
+FROM
+  invoice
+WHERE
+EXTRACT(YEAR FROM invoice_date) = 2013 AND EXTRACT(MONTH FROM invoice_date) = 8;
