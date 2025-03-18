@@ -1,6 +1,6 @@
 Select * from invoice 
 
-Select Count(*) From invoice Where invoice IS NULL;
+Select Count(*) From invoice Where(customer_id,invoice_date,billing_address,billing_city,billing_state,billing_country,billingpostal_code,total) IS NULL;
 
 SELECT invoice_id,
        total,
